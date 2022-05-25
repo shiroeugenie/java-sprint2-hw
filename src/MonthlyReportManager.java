@@ -13,10 +13,12 @@ public class MonthlyReportManager {
             String wordedMonthName = processor.convertMonthToWords(month.substring(month.length() - 2)); // get last 2 digit sof the file name and convert them
             String[] content = processor.getProcessedFileContent(month);
 
-            String mostProfitableItem = getMostProfitableItem(content).get(0);
-            int biggestProfit = Integer.parseInt(getMostProfitableItem(content).get(1));
-            String biggestExpenseItem = getMaxExpense(content).get(0);
-            int biggestExpenseValue = Integer.parseInt(getMaxExpense(content).get(1));
+            ArrayList<String> profitList = getMostProfitableItem(content);
+            String mostProfitableItem = profitList.get(0);
+            int biggestProfit = Integer.parseInt(profitList.get(1));
+            ArrayList<String> expenseList = getMaxExpense(content);
+            String biggestExpenseItem = expenseList.get(0);
+            int biggestExpenseValue = Integer.parseInt(expenseList.get(1));
 
             System.out.println("Вывожу данные за " + wordedMonthName + ".");
             System.out.println("Наибоее прибыльный товар: " + mostProfitableItem + ". Общий доход: " + biggestProfit);
@@ -116,7 +118,7 @@ public class MonthlyReportManager {
     public ArrayList<String> getMostProfitableItem(String[] content){
         int maxProfit = 0;
         String mostProfitableItem = "";
-        ArrayList<String> MostProfitableList = new ArrayList<>();
+        ArrayList<String> mostProfitableList = new ArrayList<>();
         for (int i = 1; i < content.length; i++){                                                    // parsing lines from the file
             String[] splitVals = content[i].split(",");
             String item = splitVals[0];
@@ -131,10 +133,10 @@ public class MonthlyReportManager {
                 }
             }
         }
-        MostProfitableList.add(mostProfitableItem);
-        MostProfitableList.add(Integer.toString(maxProfit));
+        mostProfitableList.add(mostProfitableItem);
+        mostProfitableList.add(Integer.toString(maxProfit));
 
-        return MostProfitableList;
+        return mostProfitableList;
     }
 
 

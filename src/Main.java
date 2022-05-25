@@ -11,8 +11,6 @@ public class Main {
         while (true) {
             printMenu();
             int input = reader.nextInt();
-            //int input = 3; // hardcoded for testing
-
             switch (input) {
                 case 1:
                     processor.readFileContentsOrNull(monthly.TYPE);
